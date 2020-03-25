@@ -1,1 +1,5 @@
-# C950_WGUPS
+# # C950_WGUPS
+
+## Tasks
+
+- [ ] read csv files into data structure
