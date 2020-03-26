@@ -1,4 +1,4 @@
-# David Kruggel #001104309
+# David Kruggel (#001104309)
 
 # NEEDS
 # Package class
@@ -8,19 +8,17 @@
 
 # Print ALL data inside all three specified time periods
 
-class Package:
-    def __init__(self, package_id, del_address, del_deadline, del_city, del_zip, weight, status):
-        self.id = package_id
-        self.del_address = del_address
-        self.del_deadline = del_deadline
-        self.del_city = del_city
-        self.del_zip = del_zip
-        self.weight = weight
-        self.status = status
-    
-    def __str__(self):
-        return str(self.id) + ': ' + self.status
+from package import Package
+import csv
 
-package = Package(1, '123 Main Street', '03/28/20', 'Anywhere', '55555', 22.4, 'Out for delivery')
+packages = list()
 
-print(str(package))
+with open('./data/WGUPS Package File.csv', newline='') as file:
+    reader = csv.reader(file, delimiter=',', quotechar='|')
+    for row in file:
+        s = row.split(',')
+        if s[0].isdigit():
+            packages.append(Package(s[0], s[1], s[5], s[2], s[4], s[6], ''))
+
+for package in packages:
+    print(str(package))
