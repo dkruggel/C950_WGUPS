@@ -2,4 +2,6 @@
 
 ## Tasks
 
-- [ ] read csv files into data structure
+- [x] read csv files into data structure
+- [ ] choose algorithm
+- [ ] apply algorithm
