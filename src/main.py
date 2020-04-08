@@ -1,34 +1,33 @@
 # David Kruggel (#001104309)
 
-# NEEDS
-# Package class
-# Data Structure
-
-# Initialize data
-
-# Print ALL data inside all three specified time periods
-
 from package import Package
 from location import Location
+from package_table import PackageTable
 import csv
 from operator import itemgetter
 from datetime import datetime
 
-packages = list()
 locations = list()
+package_table = PackageTable(40)
 
 with open('./data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
     for row in file:
         s = row.split(',')
         if s[0].isdigit():
-            time = s[5]
-            if time == 'EOD':
-                time = datetime.strptime('23:59', '%H:%M')
+            id = s[0]
+            address = s[1]
+            deadline = s[5]
+            city = s[2]
+            zip = s[4]
+            weight = s[6]
+            status = ''
+            if deadline == 'EOD':
+                deadline = datetime.strptime('23:59', '%H:%M')
             else:
-                time = time[0:-3]
-                time = datetime.strptime(time, '%H:%M')
-            packages.append(Package(s[0], s[1], time, s[2], s[4], s[6], ''))
+                deadline = deadline[0:-3]
+                deadline = datetime.strptime(deadline, '%H:%M')
+            package_table.insert(id, address, deadline, city, zip, weight, status)
 
 with open('./data/WGUPS Distance Table.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
@@ -42,10 +41,10 @@ with open('./data/WGUPS Distance Table.csv', newline='') as file:
             locations.append(Location(s[0], s[1], distances))
         i += 1
 
-packages.sort(key=lambda Package: Package.del_deadline)
+# packages.sort(key=lambda Package: Package.del_deadline)
 
-for package in packages:
-    print(str(package) + str(datetime.time(package.del_deadline)))
+# for package in packages:
+#     print(str(package) + str(datetime.time(package.del_deadline)))
 
 # for location in locations:
 #     print(location.name)

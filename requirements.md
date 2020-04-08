@@ -13,7 +13,7 @@
     [ ] 6.  Discuss the self-adjusting data structures chosen and their strengths and weaknesses based on the scenario.
 
 [ ] C.  Write an original code to solve and to meet the requirements of lowest mileage usage and having all  packages delivered on time.
-    [ ] 1.  Create a comment within the first line of your code that includes your first name, last name, and student ID.
+    [x] 1.  Create a comment within the first line of your code that includes your first name, last name, and student ID.
     [ ] 2.  Include comments at each  block of code to explain the process and flow of the coding.
 
 [ ] D.  Identify a data structure that can be used with your chosen algorithm to store the package data.
