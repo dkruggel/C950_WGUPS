@@ -1,14 +1,13 @@
 # David Kruggel (#001104309)
 
+import csv
 from package import Package
 from location import Location
-from package_table import PackageTable
-import csv
-from operator import itemgetter
+from hashtable import HashTable
 from datetime import datetime
 
-locations = list()
-package_table = PackageTable(40)
+# Initialize data
+package_table = HashTable(40)
 
 with open('./data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
@@ -29,6 +28,8 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
                 deadline = datetime.strptime(deadline, '%H:%M')
             package_table.insert(id, address, deadline, city, zip, weight, status)
 
+locations = list()
+
 with open('./data/WGUPS Distance Table.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
     i = 0
@@ -40,11 +41,3 @@ with open('./data/WGUPS Distance Table.csv', newline='') as file:
                 distances.append(s[x])
             locations.append(Location(s[0], s[1], distances))
         i += 1
-
-# packages.sort(key=lambda Package: Package.del_deadline)
-
-# for package in packages:
-#     print(str(package) + str(datetime.time(package.del_deadline)))
-
-# for location in locations:
-#     print(location.name)
