@@ -8,6 +8,7 @@ from datetime import datetime
 
 # Initialize data
 package_table = HashTable(39)
+location_table = HashTable(23)
 
 with open('./data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
@@ -28,8 +29,6 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
                 deadline = datetime.strptime(deadline, '%H:%M')
             package_table.insert(Package(id, address, deadline, city, zip, weight, status))
 
-locations = list()
-
 with open('./data/WGUPS Distance Table.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
     i = 0
@@ -39,5 +38,9 @@ with open('./data/WGUPS Distance Table.csv', newline='') as file:
             distances = list()
             for x in range(1, 29):
                 distances.append(s[x])
-            locations.append(Location(s[0], s[1], distances))
+            location_table.insert(Location(i - 1, s[0], s[1], distances))
         i += 1
+
+for i in range(1, 40):
+    package = package_table.search(str(i))
+    print(package)

@@ -13,7 +13,7 @@ class HashTable:
     # Insert function
     def insert(self, item):
         # Use hash function to return bucket index for insertion
-        bucket = hash(item) % len(self.table)
+        bucket = hash(item.id) % len(self.table)
 
         # Get the list at the bucket index
         bucket_list = self.table[bucket]
@@ -30,15 +30,17 @@ class HashTable:
         bucket_list = self.table[bucket]
 
         # If the id exists in the bucket list, let's get the whole item
-        if key in bucket_list:
-            # Find the index of the item in the bucket list
-            item_index = bucket_list.index(key)
+        for item in bucket_list:
+            if item.id == key:
+                # Find the index of the item in the bucket list
+                item_index = bucket_list.index(item)
 
-            # Return that item!
-            return bucket_list[item_index]
-        else:
-            # Sad times, the item was not found
-            return None
+                # Return that item!
+                return bucket_list[item_index]
+
+        # Sad times, the item was not found
+        return None
+                
 
     # Removes an item with matching key from the hash table.
     def remove(self, key):
