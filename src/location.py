@@ -7,3 +7,6 @@ class Location:
 
     def getDistance(self, toLoc):
         return 5.0
+
+    def __str__(self):
+        return self.id + ': ' + self.name

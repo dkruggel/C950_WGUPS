@@ -38,9 +38,13 @@ with open('./data/WGUPS Distance Table.csv', newline='') as file:
             distances = list()
             for x in range(1, 29):
                 distances.append(s[x])
-            location_table.insert(Location(i - 1, s[0], s[1], distances))
+            location_table.insert(Location(str(i - 1), s[0], s[1], distances))
         i += 1
 
-for i in range(1, 40):
+for i in range(1, 41):
     package = package_table.search(str(i))
     print(package)
+
+for i in range(1, 27):
+    location = location_table.search(str(i))
+    print(location)
