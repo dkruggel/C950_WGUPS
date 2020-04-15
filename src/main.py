@@ -7,7 +7,7 @@ from hashtable import HashTable
 from datetime import datetime
 
 # Initialize data
-package_table = HashTable(40)
+package_table = HashTable(39)
 
 with open('./data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
@@ -26,7 +26,7 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
             else:
                 deadline = deadline[0:-3]
                 deadline = datetime.strptime(deadline, '%H:%M')
-            package_table.insert(id, address, deadline, city, zip, weight, status)
+            package_table.insert(Package(id, address, deadline, city, zip, weight, status))
 
 locations = list()
 

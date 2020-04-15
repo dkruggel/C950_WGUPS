@@ -2,7 +2,7 @@
 
 ## Section 1: Programming/Coding
 
-[ ] A. Identify the algorithm that will be used to create a program to deliver the packages and meets all  requirements specified in the scenario.
+[ ] A. Identify the algorithm that will be used to create a program to deliver the packages and meets all requirements specified in the scenario.
 
 [ ] B.  Write a core algorithm overview, using the sample given, in which you do the following:
     [ ] 1.  Comment using pseudocode to show the logic of the algorithm applied to this software solution.
@@ -19,7 +19,7 @@
 [ ] D.  Identify a data structure that can be used with your chosen algorithm to store the package data.
     [ ] 1.  Explain how your data structure includes the relationship between the data points you are storing.
 
-[ ] E.  Develop a hash table, without using any additional libraries or classes, with an insertion function that takes the following components as input and inserts the components into the hash table:
+[x] E.  Develop a hash table, without using any additional libraries or classes, with an insertion function that takes the following components as input and inserts the components into the hash table:
     - package ID number
     - delivery address
     - delivery deadline
@@ -28,7 +28,7 @@
     - package weight
     - delivery status (e.g., delivered, in route)
 
-[ ] F.  Develop a look-up function that takes the following components as input and returns the corresponding data elements:
+[x] F.  Develop a look-up function that takes the following components as input and returns the corresponding data elements:
     - package ID number
     - delivery address
     - delivery deadline
@@ -55,7 +55,7 @@
 [ ] J.  Describe what you would do differently if you did this project again.
 
 [ ] K.  Justify your choice of data structure by doing the following:
-    [ ] 1.  Verify that the data structure you chose meets all  the criteria and requirements given in the scenario.
+    [ ] 1.  Verify that the data structure you chose meets all the criteria and requirements given in the scenario.
         [ ] a.  Describe the efficiency of the data structure chosen.
         [ ] b.  Explain the expected overhead when linking to the next data item.
         [ ] c.  Describe the implications of when more package data is added to the system or other changes in scale occur.
