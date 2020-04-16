@@ -52,11 +52,6 @@ with open('./data/WGUPS Distance Table.csv', newline='') as file:
 #     location = location_table.search(i)
 #     print(location)
 
-notLoaded = HashTable(10)
-notLoaded = package_table.copy()
-
-notLoaded.remove(1)
-
 truck1 = Truck(1)
 i = 1
 while len(truck1) < 16:

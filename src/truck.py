@@ -9,7 +9,10 @@ class Truck:
     def addStop(self, package):
         if str(package.notes) == 'Can only be on truck 2' and self.id == 1:
             return -1
+        if package.status == 'loaded':
+            return -1
         self.packages.append(package)
+        package.status = 'loaded'
         return 1
         
 
