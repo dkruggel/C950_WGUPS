@@ -40,7 +40,6 @@ class HashTable:
 
         # Sad times, the item was not found
         return None
-                
 
     # Removes an item with matching key from the hash table.
     def remove(self, key):
@@ -51,3 +50,9 @@ class HashTable:
         # remove the item from the bucket list if it is present.
         if key in bucket_list:
             bucket_list.remove(key)
+
+    def __len__(self):
+        length = 0
+        for i in range(len(self.table)):
+            length += len(self.table[i])
+        return length

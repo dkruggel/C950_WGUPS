@@ -5,10 +5,11 @@ from package import Package
 from location import Location
 from hashtable import HashTable
 from datetime import datetime
+from graph import Graph
 
 # Initialize data
-package_table = HashTable(39)
-location_table = HashTable(23)
+package_table = HashTable(10)
+location_table = HashTable(10)
 
 with open('./data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
@@ -27,7 +28,7 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
             else:
                 deadline = deadline[0:-3]
                 deadline = datetime.strptime(deadline, '%H:%M')
-            package_table.insert(Package(id, address, deadline, city, zip, weight, status))
+            package_table.insert(Package(int(id), address, deadline, city, zip, weight, status))
 
 with open('./data/WGUPS Distance Table.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
@@ -38,13 +39,16 @@ with open('./data/WGUPS Distance Table.csv', newline='') as file:
             distances = list()
             for x in range(1, 29):
                 distances.append(s[x])
-            location_table.insert(Location(str(i - 1), s[0], s[1], distances))
+            location_table.insert(Location(i - 1, s[0], s[1], distances))
         i += 1
 
-for i in range(1, 41):
-    package = package_table.search(str(i))
-    print(package)
+# for i in range(1, 41):
+#     package = package_table.search(i)
+#     print(package)
 
-for i in range(1, 27):
-    location = location_table.search(str(i))
-    print(location)
+# for i in range(1, 27):
+#     location = location_table.search(i)
+#     print(location)
+
+graph = Graph(location_table)
+print(str(graph))

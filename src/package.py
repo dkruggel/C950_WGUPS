@@ -9,4 +9,4 @@ class Package:
         self.status = status
     
     def __str__(self):
-        return str(self.id) + ': ' + self.status
+        return str(self.id) + ': ' + self.status + '  ' + self.del_address
