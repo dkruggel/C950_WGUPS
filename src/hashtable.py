@@ -48,11 +48,18 @@ class HashTable:
         bucket_list = self.table[bucket]
 
         # remove the item from the bucket list if it is present.
-        if key in bucket_list:
-            bucket_list.remove(key)
+        for item in bucket_list:
+            if item.id == key:
+                bucket_list.remove(item)
 
     def __len__(self):
         length = 0
         for i in range(len(self.table)):
             length += len(self.table[i])
         return length
+
+    def copy(self):
+        new_table = []
+        for bucket in self.table:
+            new_table.append(bucket)
+        return new_table
