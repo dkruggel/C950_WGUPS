@@ -64,4 +64,6 @@ while len(truck2) < 16:
     i += 1
 
 graph = Graph(location_table)
+truck1.getBestPath(graph)
+
 print(str(graph))
