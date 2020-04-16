@@ -22,3 +22,4 @@ class Graph:
             edge = self.edges.search(i)
             if self.edges.search(i) != None:
                 print(edge.vertex0.name + '->' + edge.vertex1.name + ' = ' + str(edge.distance))
+        return ''
