@@ -32,30 +32,9 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
                 deadline = datetime.strptime(deadline, '%H:%M')
             package_table.insert(Package(int(id), address, deadline, city, zip, weight, status, notes))
 
-with open('./data/WGUPS Distance Table.csv', newline='') as file:
-    reader = csv.reader(file, delimiter=',', quotechar='|')
-    i = 0
-    neighbors = []
-    for row in file:
-        s = row.split(',')
-        if i == 0:
-            for j in range(2,len(s)):
-                neighbors.append(s[j])
-        else:
-            distances = {}
-            for x in range(2, len(neighbors)):
-                if s[0] != neighbors[x - 2]:
-                    distances[neighbors[x - 2]] = (s[x])
-            location_table.insert(Location(i - 1, s[0], s[1], distances))
-        i += 1
-
 # for i in range(1, 41):
 #     package = package_table.search(i)
 #     print(package)
-
-# for i in range(1, 27):
-#     location = location_table.search(i)
-#     print(location)
 
 truck1 = Truck(1)
 i = 1
@@ -68,7 +47,8 @@ while len(truck2) < 16:
     truck2.addStop(package_table.search(i))
     i += 1
 
-graph = Graph(location_table)
+graph = Graph(27)
 truck1.getBestPath(graph)
 
-print(str(graph))
+
+# TODO: create new graph for each truck based on package addresses
