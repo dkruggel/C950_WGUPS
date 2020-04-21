@@ -35,12 +35,17 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
 with open('./data/WGUPS Distance Table.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
     i = 0
+    neighbors = []
     for row in file:
         s = row.split(',')
-        if i != 0:
-            distances = list()
-            for x in range(1, 29):
-                distances.append(s[x])
+        if i == 0:
+            for j in range(2,len(s)):
+                neighbors.append(s[j])
+        else:
+            distances = {}
+            for x in range(2, len(neighbors)):
+                if s[0] != neighbors[x - 2]:
+                    distances[neighbors[x - 2]] = (s[x])
             location_table.insert(Location(i - 1, s[0], s[1], distances))
         i += 1
 
