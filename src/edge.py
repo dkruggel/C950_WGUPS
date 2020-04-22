@@ -1,6 +1,5 @@
 class Edge:
-    def __init__(self, id, v0, v1, distance):
-        self.id = id
+    def __init__(self, v0, v1, distance):
         self.vertex0 = v0
         self.vertex1 = v1
         self.distance = distance

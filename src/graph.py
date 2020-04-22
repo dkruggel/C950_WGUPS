@@ -1,28 +1,49 @@
-from location import Location
-from hashtable import HashTable
-import csv
+from vertex import Vertex
+import math
 
 class Graph:
-    def __init__(self, num_vertices):
-        self.vertices = [[0 for column in range(num_vertices)] for row in range(num_vertices)]
+    def __init__(self):
+        self.vertices = {}
+        self.edges = {}
 
-        with open('./data/WGUPS Distance Table.csv', newline='') as file:
-            reader = csv.reader(file, delimiter=',', quotechar='|')
-            r = 0
-            i = 0
-            j = 0
-            neighbors = []
-            for row in file:
-                s = row.split(',')
-                if r == 0:
-                    for j in range(2,len(s)):
-                        neighbors.append(s[j])
-                else:
-                    #distances = {}
-                    for x in range(0, len(neighbors) - 1):
-                        self.vertices[i][x] = float(s[x + 2])
-                        #if s[0] != neighbors[x - 2]:
-                            #distances[neighbors[x - 2]] = (s[x])
-                    #self.vertices[i][x] = Location(i - 1, s[0], s[1], distances)
-                    i += 1
-                r += 1
+    def addVertex(self, location):
+        self.vertices[location] = Vertex(location)
+
+    def addEdge(self, vertex0, vertex1, distance):
+        self.edges[(vertex0, vertex1)] = distance
+
+    def Dijkstra(self):
+        # Initial list of nodes that have not been visited
+        uNodes = []
+
+        # List of nodes that have been visited
+        vNodes = []
+
+        # List of total distances from beginning
+        dist = []
+
+        # Add all vertices (delivery stops) to unvisited list
+        for vertex in self.vertices:
+            uNodes.append(vertex)
+
+        # Initialize distances list with first distance from start
+        dist.append(('Western Governors University 4001 South 700 East', 0.0))
+
+        while len(uNodes) > 0:
+            nextNode = 0
+
+            # Get the nearest node
+            min = math.inf
+            for vertex in uNodes:
+                distance = vertex.getDistance(dist[nextNode][0])
+                if distance < min:
+                    min = distance
+                    u = uNodes.pop(vertex)
+                    vNodes.append(vertex)
+
+            # Loop through remaining nodes in uNodes to find next shortest path from start
+            for vertex in uNodes:
+                alt = dist[nextNode][0] + vertex.getDistance(dist[1][1])
+                if alt < dist[1][1]:
+                    dist[1][1] = alt
+                    nextNode = 1

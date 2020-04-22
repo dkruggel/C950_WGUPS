@@ -2,7 +2,7 @@
 
 import csv
 from package import Package
-from location import Location
+from locationtable import LocationTable
 from hashtable import HashTable
 from datetime import datetime
 from graph import Graph
@@ -10,7 +10,8 @@ from truck import Truck
 
 # Initialize data
 package_table = HashTable(10)
-location_table = HashTable(10)
+
+locations = LocationTable()
 
 with open('./data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
@@ -47,8 +48,16 @@ while len(truck2) < 16:
     truck2.addStop(package_table.search(i))
     i += 1
 
-graph = Graph(27)
-truck1.getBestPath(graph)
+# Create truck1 route
+truck1Route = Graph()
 
+# Add vertices, starting with hub (WGU)
+truck1Route.addVertex(locations.getLocation('4001 South 700 East'))
+
+for i in range(len(truck1.packages)):
+    address = truck1.packages[i].del_address
+    truck1Route.addVertex(locations.getLocation(address))
+
+truck1Route.Dijkstra()
 
 # TODO: create new graph for each truck based on package addresses
