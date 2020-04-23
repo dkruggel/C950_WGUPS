@@ -19,7 +19,7 @@ class LocationTable:
                 else:
                     j = 0
                     for i in range(2, len(s)):
-                        if s[i] != '\r\n' and s[i] != '':
+                        if s[i] != '\r\n' and s[i] != '\n' and s[i] != '':
                             distances[locs[j]] = float(s[i])
                             j += 1
                     address = str(s[1])[:-8]

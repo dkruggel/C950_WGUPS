@@ -48,16 +48,39 @@ while len(truck2) < 16:
     truck2.addStop(package_table.search(i))
     i += 1
 
-# Create truck1 route
+# Create truck routes
 truck1Route = Graph()
+truck2Route = Graph()
+truck3Route = Graph()
 
 # Add vertices, starting with hub (WGU)
 truck1Route.addVertex(locations.getLocation('4001 South 700 East'))
+truck2Route.addVertex(locations.getLocation('4001 South 700 East'))
 
 for i in range(len(truck1.packages)):
     address = truck1.packages[i].del_address
     truck1Route.addVertex(locations.getLocation(address))
 
-truck1Route.Dijkstra()
+for i in range(len(truck2.packages)):
+    address = truck2.packages[i].del_address
+    truck2Route.addVertex(locations.getLocation(address))
 
-# TODO: create new graph for each truck based on package addresses
+totalDistance = truck1Route.Dijkstra()
+totalDistance += truck2Route.Dijkstra()
+
+# Deliver final packages
+i = 1
+truck3 = Truck(3)
+while package_table.search(i) is not None:
+    truck3.addStop(package_table.search(i))
+    i += 1
+
+truck3Route.addVertex(locations.getLocation('4001 South 700 East'))
+
+for i in range(len(truck3.packages)):
+    address = truck3.packages[i].del_address
+    truck3Route.addVertex(locations.getLocation(address))
+
+totalDistance += truck3Route.Dijkstra()
+
+print('Total travelled distance: ', totalDistance)
