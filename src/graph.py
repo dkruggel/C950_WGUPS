@@ -2,9 +2,16 @@ from vertex import Vertex
 import math
 
 class Graph:
-    def __init__(self):
+    def __init__(self, truck, locations):
         self.vertices = {}
         self.edges = {}
+        self.truck = truck
+
+        self.addVertex(locations.getLocation('4001 South 700 East'))
+        
+        for i in range(len(truck.packages)):
+            address = truck.packages[i].del_address
+            self.addVertex(locations.getLocation(address))
 
     def addVertex(self, location):
         index = len(self.vertices)

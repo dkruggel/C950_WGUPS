@@ -44,7 +44,7 @@ def getSnapshot(snap_time):
         if i < len(truck1Path) and truck3Ready == False:
             truck1_next = truck1Path[i]
             if truck1_next[1] <= dist_into_route:
-                for package in truck1.packages:
+                for package in truck1Route.truck.packages:
                     if package.del_address == truck1_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
@@ -61,7 +61,7 @@ def getSnapshot(snap_time):
         if j < len(truck2Path) and time >= 65: # this is to hold truck 2 until 9:05 am
             truck2_next = truck2Path[j]
             if truck2_next[1] <= dist_into_route:
-                for package in truck2.packages:
+                for package in truck2Route.truck.packages:
                     if package.del_address == truck2_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
@@ -74,7 +74,7 @@ def getSnapshot(snap_time):
         if i < len(truck3Path) and truck3Ready:
             truck3_next = truck3Path[i]
             if truck3_next[1] <= dist_into_route_3:
-                for package in truck3.packages:
+                for package in truck3Route.truck.packages:
                     if package.del_address == truck3_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
@@ -86,7 +86,7 @@ def getSnapshot(snap_time):
         time += 1
 
     for i in range(1, len(package_table) + 1):
-        print(package_table.search(i))    
+        print(package_table.search(i))
 
 # Initialize data
 package_table = HashTable(10)
@@ -113,66 +113,18 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
                 deadline = datetime.strptime(deadline, '%H:%M')
             package_table.insert(Package(int(id), address, deadline, city, zip, weight, status, notes))
 
-truck1 = Truck(1)
-
 t1 = [1,13,14,15,16,19,20,29,30,31,34,37,40]
-for i in t1:
-    truck1.addStop(package_table.search(i))
-#i = 1
-# while len(truck1) < 18:
-#     truck1.addStop(package_table.search(i))
-#     i += 1
-# i = 1
-
-truck2 = Truck(2)
-
 t2 = [2,3,4,5,7,8,10,11,12,17,18,36,38]
-for i in t2:
-    truck2.addStop(package_table.search(i))
-
-# while len(truck2) < 18:
-#     truck2.addStop(package_table.search(i))
-#     i += 1
+t3 = [6,9,21,22,23,24,25,26,27,28,32,33,35,39]
 
 # Create truck routes
-truck1Route = Graph()
-truck2Route = Graph()
-truck3Route = Graph()
-
-# Add vertices, starting with hub (WGU)
-truck1Route.addVertex(locations.getLocation('4001 South 700 East'))
-truck2Route.addVertex(locations.getLocation('4001 South 700 East'))
-
-for i in range(len(truck1.packages)):
-    address = truck1.packages[i].del_address
-    truck1Route.addVertex(locations.getLocation(address))
-
-for i in range(len(truck2.packages)):
-    address = truck2.packages[i].del_address
-    truck2Route.addVertex(locations.getLocation(address))
+truck1Route = Graph(Truck(1, t1, package_table), locations)
+truck2Route = Graph(Truck(2, t2, package_table), locations)
+truck3Route = Graph(Truck(3, t3, package_table), locations)
 
 # Get best route
 truck1Path = getBestPath(truck1Route)
 truck2Path = getBestPath(truck2Route)
-
-# Load remaining packages
-truck3 = Truck(3)
-
-t3 = [6,9,21,22,23,24,25,26,27,28,32,33,35,39]
-for i in t3:
-    truck3.addStop(package_table.search(i))
-
-# i = 1
-# while package_table.search(i) is not None:
-#     truck3.addStop(package_table.search(i))
-#     i += 1
-
-truck3Route.addVertex(locations.getLocation('4001 South 700 East'))
-
-for i in range(len(truck3.packages)):
-    address = truck3.packages[i].del_address
-    truck3Route.addVertex(locations.getLocation(address))
-
 truck3Path = getBestPath(truck3Route)
 
 #getSnapshot('9:25')

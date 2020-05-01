@@ -4,10 +4,13 @@ from graph import Graph
 import math
 
 class Truck:
-    def __init__(self, id):
+    def __init__(self, id, packageList, package_table):
         self.id = id
         self.packages = []
         self.totalDistance = 0
+        
+        for i in packageList:
+            self.addStop(package_table.search(i))
 
     def addStop(self, package):
         if str(package.notes) == 'Can only be on truck 2\n' and self.id == 1:
