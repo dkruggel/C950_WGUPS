@@ -10,4 +10,4 @@ class Package:
         self.notes = notes
     
     def __str__(self):
-        return str(self.id) + ': ' + self.status + '  ' + self.del_address
+        return str(f"{self.id:02d}") + ': ' + str(self.status).ljust(30, ' ') + self.del_address

@@ -8,6 +8,7 @@ from hashtable import HashTable
 from datetime import datetime
 from graph import Graph
 from truck import Truck
+import os
 
 def getBestPath(truckRoute):
     temp = truckRoute.Dijkstra()
@@ -32,18 +33,21 @@ def getSnapshot(snap_time):
     i = 1
     j = 1
     truck3Ready = False
-    dist_into_route = 0
+    dist_into_route_1 = 0
+    dist_into_route_2 = 0
     dist_into_route_3 = 0
     # Step 1 minute increments until all packages
     # are delivered
     while time != snapshot_time:
-        dist_into_route += float(18 / 60)
+        dist_into_route_1 += float(18 / 60)
+        if time >= 65:
+            dist_into_route_2 += float(18 / 60)
         if truck3Ready:
             dist_into_route_3 += float(18 / 60)
 
         if i < len(truck1Path) and truck3Ready == False:
             truck1_next = truck1Path[i]
-            if truck1_next[1] <= dist_into_route:
+            if truck1_next[1] <= dist_into_route_1:
                 for package in truck1Route.truck.packages:
                     if package.del_address == truck1_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
@@ -54,13 +58,13 @@ def getSnapshot(snap_time):
                         break
         elif truck3Ready == False:
             dist_to_hub = truck1Path[len(truck1Path) - 1][0].getDistance('Western Governors University 4001 South 700 East')
-            if truck1Path[len(truck1Path) - 1][1] + dist_to_hub <= dist_into_route:
+            if truck1Path[len(truck1Path) - 1][1] + dist_to_hub <= dist_into_route_1:
                 truck3Ready = True
                 i = 1
 
         if j < len(truck2Path) and time >= 65: # this is to hold truck 2 until 9:05 am
             truck2_next = truck2Path[j]
-            if truck2_next[1] <= dist_into_route:
+            if truck2_next[1] <= dist_into_route_2:
                 for package in truck2Route.truck.packages:
                     if package.del_address == truck2_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
@@ -68,7 +72,8 @@ def getSnapshot(snap_time):
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
                         package.status = 'delivered @ ' + currTime + ' by Truck 2'
                         j += 1
-                        break
+                        if truck2Path[j+1][0].address != truck2_next[0].address:
+                            break
 
 
         if i < len(truck3Path) and truck3Ready:
@@ -113,9 +118,9 @@ with open('./data/WGUPS Package File.csv', newline='') as file:
                 deadline = datetime.strptime(deadline, '%H:%M')
             package_table.insert(Package(int(id), address, deadline, city, zip, weight, status, notes))
 
-t1 = [1,13,14,15,16,19,20,29,30,31,34,37,40]
-t2 = [2,3,4,5,7,8,10,11,12,17,18,36,38]
-t3 = [6,9,21,22,23,24,25,26,27,28,32,33,35,39]
+t1 = [1,13,14,15,16,19,20,29,30,31,34]
+t2 = [3,5,6,7,8,10,11,12,17,18,25,26,36,37,38,40]
+t3 = [2,4,9,21,22,23,24,27,28,32,33,35,39]
 
 # Create truck routes
 truck1Route = Graph(Truck(1, t1, package_table), locations)
@@ -127,6 +132,20 @@ truck1Path = getBestPath(truck1Route)
 truck2Path = getBestPath(truck2Route)
 truck3Path = getBestPath(truck3Route)
 
+# User interaction
+# print('Welcome to the WGUPS delivery tracker!\n1: Get snapshot of package status for all packages')
+# command = input('->')
+
+# while command.lower() != 'exit':
+#     if command == '1':
+#         time = input('What time for snapshot? (HH:mm)')
+#         getSnapshot(time)
+#     elif command == 'clear':
+#         os.system('cls' if os.name == 'nt' else 'clear')
+
+#     command = input('->')
+
 #getSnapshot('9:25')
 #getSnapshot('10:25')
-getSnapshot('13:12')
+getSnapshot('12:10')
+

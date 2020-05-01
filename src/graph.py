@@ -68,6 +68,6 @@ class Graph:
 
         # for i in range(len(vNodes)):
         #     print(vNodes[i][0].name)
-        # print(totalDist)
+        print(totalDist)
 
         return vNodes

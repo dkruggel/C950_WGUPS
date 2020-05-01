@@ -17,8 +17,8 @@ class Truck:
             return -1
         if str(package.status).startswith('loaded'):
             return -1
-        if 'Delayed' in package.notes and self.id != 3:
-            return -1
+        # if 'Delayed' in package.notes and self.id != 3:
+        #     return -1
         self.packages.append(package)
         package.status = 'loaded on truck ' + str(self.id)
         return 1
