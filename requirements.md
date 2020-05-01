@@ -2,7 +2,7 @@
 
 ## Section 1: Programming/Coding
 
-[ ] A. Identify the algorithm that will be used to create a program to deliver the packages and meets all requirements specified in the scenario.
+[x] A. Identify the algorithm that will be used to create a program to deliver the packages and meets all requirements specified in the scenario.
 
 [ ] B.  Write a core algorithm overview, using the sample given, in which you do the following:
     [ ] 1.  Comment using pseudocode to show the logic of the algorithm applied to this software solution.

@@ -52,12 +52,14 @@ class HashTable:
             if item.id == key:
                 bucket_list.remove(item)
 
+    # Returns the total number of items in the hash table
     def __len__(self):
         length = 0
         for i in range(len(self.table)):
             length += len(self.table[i])
         return length
 
+    # Returns a shallow copy of the hash table
     def copy(self):
         new_table = []
         for bucket in self.table:

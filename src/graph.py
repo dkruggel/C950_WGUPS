@@ -13,7 +13,7 @@ class Graph:
         self.edges[(vertex0, vertex1)] = distance
 
     def Dijkstra(self):
-        # Initial list of nodes that have not been visited
+        # List of nodes that have not been visited
         uNodes = []
 
         # List of nodes that have been visited
@@ -57,8 +57,8 @@ class Graph:
         # Add return to hub
         totalDist += currNode[0].getDistance('Western Governors University 4001 South 700 East')
 
-        for i in range(len(vNodes)):
-            print(vNodes[i][0].name)
-        print(totalDist)
+        # for i in range(len(vNodes)):
+        #     print(vNodes[i][0].name)
+        # print(totalDist)
 
-        return totalDist
+        return vNodes

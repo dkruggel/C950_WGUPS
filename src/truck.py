@@ -3,19 +3,6 @@ from vertex import Vertex
 from graph import Graph
 import math
 
-
-
-
-# for i in range(len(truck1Route.vertices) - 1):
-#     keys = list(truck1Route.vertices.keys())
-#     v0 = truck1Route.vertices[keys[i]]
-#     v1 = truck1Route.vertices[keys[i + 1]]
-#     distance = v0.location.distances[v1.location.name]
-#     truck1Route.addEdge(v0, v1, distance)
-#     print(v0.location.name + ' -> ' + v1.location.name + ':  ' + str(distance))
-
-
-
 class Truck:
     def __init__(self, id):
         self.id = id
@@ -33,8 +20,10 @@ class Truck:
         package.status = 'loaded'
         return 1
 
-    def getNextStop(self):
-        return self.packages.pop()
+    def getNextStop(self, address):
+        for package in self.packages:
+            if package.del_address == address:
+                return package
 
     def __len__(self):
         return len(self.packages)
