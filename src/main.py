@@ -45,7 +45,7 @@ def getSnapshot(snap_time):
             truck1_next = truck1Path[i]
             if truck1_next[1] <= dist_into_route:
                 for package in truck1.packages:
-                    if package.del_address == truck1_next[0].address and package.status == 'loaded':
+                    if package.del_address == truck1_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
@@ -58,11 +58,11 @@ def getSnapshot(snap_time):
                 truck3Ready = True
                 i = 1
 
-        if j < len(truck2Path):
+        if j < len(truck2Path) and time >= 65: # this is to hold truck 2 until 9:05 am
             truck2_next = truck2Path[j]
             if truck2_next[1] <= dist_into_route:
                 for package in truck2.packages:
-                    if package.del_address == truck2_next[0].address and package.status == 'loaded':
+                    if package.del_address == truck2_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
@@ -75,7 +75,7 @@ def getSnapshot(snap_time):
             truck3_next = truck3Path[i]
             if truck3_next[1] <= dist_into_route_3:
                 for package in truck3.packages:
-                    if package.del_address == truck3_next[0].address and package.status == 'loaded':
+                    if package.del_address == truck3_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
@@ -175,6 +175,6 @@ for i in range(len(truck3.packages)):
 
 truck3Path = getBestPath(truck3Route)
 
-#getSnapshot('9:45')
-#getSnapshot('11:45')
-getSnapshot('16:45')
+#getSnapshot('9:25')
+#getSnapshot('10:25')
+getSnapshot('13:12')

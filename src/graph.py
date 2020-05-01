@@ -7,7 +7,8 @@ class Graph:
         self.edges = {}
 
     def addVertex(self, location):
-        self.vertices[location] = Vertex(location)
+        index = len(self.vertices)
+        self.vertices[index] = Vertex(location)
 
     def addEdge(self, vertex0, vertex1, distance):
         self.edges[(vertex0, vertex1)] = distance
@@ -26,7 +27,8 @@ class Graph:
         dist.append(('Western Governors University 4001 South 700 East', 0.0))
 
         # Add all vertices (delivery stops) to unvisited list
-        for vertex in self.vertices:
+        for i in range(len(self.vertices)):
+            vertex = self.vertices[i].location
             uNodes.append((vertex, vertex.getDistance(dist[len(dist) - 1][0])))
 
         vNodes.append(uNodes.pop(0))

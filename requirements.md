@@ -37,10 +37,10 @@
     - package weight
     - delivery status (e.g., delivered, in route)
 
-[ ] G.  Provide an interface for the insert and look-up functions to view the status of any package at any time. This function should return all information about each package, including delivery status.
-    [ ] Provide screenshots to show package status of all packages at a time between 8:35 a.m. and 9:25 a.m.
-    [ ] Provide screenshots to show package status of all packages at a time between 9:35 a.m. and 10:25 a.m.
-    [ ] Provide screenshots to show package status of all packages at a time between 12:03 p.m. and 1:12 p.m.
+[x] G.  Provide an interface for the insert and look-up functions to view the status of any package at any time. This function should return all information about each package, including delivery status.
+    [x] Provide screenshots to show package status of all packages at a time between 8:35 a.m. and 9:25 a.m.
+    [x] Provide screenshots to show package status of all packages at a time between 9:35 a.m. and 10:25 a.m.
+    [x] Provide screenshots to show package status of all packages at a time between 12:03 p.m. and 1:12 p.m.
 
 [ ] H.  Run your code and provide screenshots to capture the complete execution of your code.
 
