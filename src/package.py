@@ -1,3 +1,4 @@
+# Our package object!
 class Package:
     def __init__(self, package_id, del_address, del_deadline, del_city, del_zip, weight, status, notes):
         self.id = package_id
@@ -9,5 +10,7 @@ class Package:
         self.status = status
         self.notes = notes
     
+    # Fancy little toString() overwrite to
+    # display ID, status and address neatly
     def __str__(self):
         return str(f"{self.id:02d}") + ': ' + str(self.status).ljust(30, ' ') + self.del_address

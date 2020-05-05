@@ -12,12 +12,12 @@
     [ ] 5.  Discuss the efficiency and maintainability of the software.
     [ ] 6.  Discuss the self-adjusting data structures chosen and their strengths and weaknesses based on the scenario.
 
-[ ] C.  Write an original code to solve and to meet the requirements of lowest mileage usage and having all packages delivered on time.
+[x] C.  Write an original code to solve and to meet the requirements of lowest mileage usage and having all packages delivered on time.
     [x] 1.  Create a comment within the first line of your code that includes your first name, last name, and student ID.
-    [ ] 2.  Include comments at each  block of code to explain the process and flow of the coding.
+    [x] 2.  Include comments at each  block of code to explain the process and flow of the coding.
 
-[ ] D.  Identify a data structure that can be used with your chosen algorithm to store the package data.
-    [ ] 1.  Explain how your data structure includes the relationship between the data points you are storing.
+[x] D.  Identify a data structure that can be used with your chosen algorithm to store the package data.
+    [x] 1.  Explain how your data structure includes the relationship between the data points you are storing.
 
 [x] E.  Develop a hash table, without using any additional libraries or classes, with an insertion function that takes the following components as input and inserts the components into the hash table:
     - package ID number
@@ -47,8 +47,8 @@
 ## Section 2: Annotations
 
 [ ] I.  Justify your choice of algorithm by doing the following:
-    [ ] 1.  Describe at least  two strengths of the algorithm you chose.
-    [ ] 2.  Verify that the algorithm you chose meets all  the criteria and requirements given in the scenario.
+    [x] 1.  Describe at least  two strengths of the algorithm you chose.
+    [x] 2.  Verify that the algorithm you chose meets all  the criteria and requirements given in the scenario.
     [ ] 3.  Identify two other algorithms that could be used and would have met the criteria and requirements given in the scenario.
         [ ] a.  Describe how each  algorithm identified in part I3 is different from the algorithm you chose to use in the solution.
 

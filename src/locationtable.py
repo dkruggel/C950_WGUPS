@@ -1,10 +1,14 @@
 from location import Location
 import csv
 
+# Here is the location table. This object stores the
+# locations and their data as parsed from the csv file
 class LocationTable:
     def __init__(self):
         self.locations = []
 
+        # Access the csv file and loop through rows
+        # to create location objects
         with open('./data/WGUPS Distance Table.csv', newline='') as file:
             reader = csv.reader(file, delimiter=',', quotechar='|')
             r = 0
@@ -25,6 +29,7 @@ class LocationTable:
                     address = str(s[1])[:-8]
                     self.locations.append(Location(s[0], address, distances))
 
+    # Simply a lookup by address string
     def getLocation(self, address):
         for location in self.locations:
             if address in location.address:

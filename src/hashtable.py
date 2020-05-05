@@ -58,10 +58,3 @@ class HashTable:
         for i in range(len(self.table)):
             length += len(self.table[i])
         return length
-
-    # Returns a shallow copy of the hash table
-    def copy(self):
-        new_table = []
-        for bucket in self.table:
-            new_table.append(bucket)
-        return new_table

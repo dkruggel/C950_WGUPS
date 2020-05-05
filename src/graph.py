@@ -1,14 +1,21 @@
 from vertex import Vertex
 import math
 
+# This is the graph class that will house the
+# structure and methods of the route graphs
 class Graph:
     def __init__(self, truck, locations):
+        # This initializes the dictionary object to hold the vertices
         self.vertices = {}
-        self.edges = {}
+
+        # The truck associated with this route graph
         self.truck = truck
 
+        # We need to add the hub as a starting point
         self.addVertex(locations.getLocation('4001 South 700 East'))
         
+        # Here we'll add the vertices representing the
+        # stops for each package in the truck
         for i in range(len(truck.packages)):
             address = truck.packages[i].del_address
             self.addVertex(locations.getLocation(address))
@@ -17,9 +24,12 @@ class Graph:
         index = len(self.vertices)
         self.vertices[index] = Vertex(location)
 
-    def addEdge(self, vertex0, vertex1, distance):
-        self.edges[(vertex0, vertex1)] = distance
-
+    # This is where we use Dijkstra's algorithm to find and return the
+    # optimal path (shortest distance travelled)
+    # One strength of this algorithm is the ability to always determine
+    # the absolute shortest path
+    # Another strength of this algorithm is the number of ways you
+    # could potentially implement it to achieve better performance
     def Dijkstra(self):
         # List of nodes that have not been visited
         uNodes = []
@@ -38,10 +48,12 @@ class Graph:
             vertex = self.vertices[i].location
             uNodes.append((vertex, vertex.getDistance(dist[len(dist) - 1][0])))
 
+        # Add the hub to the list of visited vertices
         vNodes.append(uNodes.pop(0))
         nextNode = 0
         totalDist = 0
 
+        # While we still have unvisited nodes, we loop!
         while len(uNodes) > 0:
             # Get the nearest node
             min = math.inf
@@ -50,10 +62,14 @@ class Graph:
                     min = distance
                     nextNode = uNodes.index((vertex, distance))
 
+            # Remove the nearest node from the unvisited nodes list
             currNode = uNodes.pop(nextNode)
+
+            # Add it to the visited nodes list, for obvious reasons
             vNodes.append(currNode)
+
+            # Keep track of its distance
             dist.append((currNode[0].name, min))
-            totalDist += min
 
             # Loop through remaining nodes in uNodes and
             # update distance
@@ -68,6 +84,6 @@ class Graph:
 
         # for i in range(len(vNodes)):
         #     print(vNodes[i][0].name)
-        print(totalDist)
+        # print(totalDist)
 
         return vNodes

@@ -55,7 +55,6 @@ def getSnapshot(snap_time):
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
                         package.status = 'delivered @ ' + currTime + ' by Truck 1'
                         i += 1
-                        break
         elif truck3Ready == False:
             dist_to_hub = truck1Path[len(truck1Path) - 1][0].getDistance('Western Governors University 4001 South 700 East')
             if truck1Path[len(truck1Path) - 1][1] + dist_to_hub <= dist_into_route_1:
@@ -72,8 +71,6 @@ def getSnapshot(snap_time):
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
                         package.status = 'delivered @ ' + currTime + ' by Truck 2'
                         j += 1
-                        if truck2Path[j+1][0].address != truck2_next[0].address:
-                            break
 
 
         if i < len(truck3Path) and truck3Ready:
@@ -86,7 +83,6 @@ def getSnapshot(snap_time):
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
                         package.status = 'delivered @ ' + currTime + ' by Truck 3'
                         i += 1
-                        break
 
         time += 1
 
@@ -133,19 +129,17 @@ truck2Path = getBestPath(truck2Route)
 truck3Path = getBestPath(truck3Route)
 
 # User interaction
-# print('Welcome to the WGUPS delivery tracker!\n1: Get snapshot of package status for all packages')
-# command = input('->')
+print('Welcome to the WGUPS delivery tracker!\n1: Get snapshot of package status for all packages')
+command = input('->')
 
-# while command.lower() != 'exit':
-#     if command == '1':
-#         time = input('What time for snapshot? (HH:mm)')
-#         getSnapshot(time)
-#     elif command == 'clear':
-#         os.system('cls' if os.name == 'nt' else 'clear')
+while command.lower() != 'exit':
+    if command == '1':
+        time = input('What time for snapshot? (HH:mm)')
+        getSnapshot(time)
 
-#     command = input('->')
+    command = input('->')
 
 #getSnapshot('9:25')
 #getSnapshot('10:25')
-getSnapshot('12:10')
+#getSnapshot('12:10')
 
