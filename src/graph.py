@@ -29,7 +29,18 @@ class Graph:
     # One strength of this algorithm is the ability to always determine
     # the absolute shortest path
     # Another strength of this algorithm is the number of ways you
-    # could potentially implement it to achieve better performance
+    # could potentially implement it with different data structures
+    # to achieve better performance
+
+    # Two other algorithms that could have been used here would be A*
+    # and a greedy algorithm.  This also happens to be where I wish
+    # I would have gone down a different path.  I believe A* would
+    # have resulted in a much more efficient application even though
+    # A* doesn't find the absolute best path and only finds the best
+    # path at a given moment.  A greedy algorithm also behaves similarly
+    # and the efficiency would be nice in a situation where the number
+    # of packages per truck increases along with the number of cities
+    # and possible trucks.
     def Dijkstra(self):
         # List of nodes that have not been visited
         uNodes = []

@@ -57,7 +57,7 @@ def getSnapshot(snap_time):
                         currMin = (time + 480) % 60
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
                         package.status = 'delivered @ ' + currTime + ' by Truck 1'
-                        i += 1
+                    i += 1
         elif truck3Ready == False:
             dist_to_hub = truck1Path[len(truck1Path) - 1][0].getDistance('Western Governors University 4001 South 700 East')
             if truck1Path[len(truck1Path) - 1][1] + dist_to_hub <= dist_into_route_1:
@@ -74,7 +74,7 @@ def getSnapshot(snap_time):
                         currMin = (time + 480) % 60
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
                         package.status = 'delivered @ ' + currTime + ' by Truck 2'
-                        j += 1
+                    j += 1
 
 
         if i < len(truck3Path) and truck3Ready:
@@ -87,7 +87,7 @@ def getSnapshot(snap_time):
                         currMin = (time + 480) % 60
                         currTime = str(currHour) + ':' + f"{currMin:02d}"
                         package.status = 'delivered @ ' + currTime + ' by Truck 3'
-                        i += 1
+                    i += 1
 
         time += 1
 
@@ -100,7 +100,7 @@ package_table = HashTable(10)
 locations = LocationTable()
 
 # O(n)
-with open('./data/WGUPS Package File.csv', newline='') as file:
+with open('../data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
     for row in file:
         s = row.split(',')
