@@ -70,6 +70,7 @@ class Graph:
 
             # Keep track of its distance
             dist.append((currNode[0].name, min))
+            totalDist += min
 
             # Loop through remaining nodes in uNodes and
             # update distance
@@ -86,4 +87,4 @@ class Graph:
         #     print(vNodes[i][0].name)
         # print(totalDist)
 
-        return vNodes
+        return vNodes, totalDist

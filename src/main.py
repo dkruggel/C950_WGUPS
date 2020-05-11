@@ -10,8 +10,9 @@ from graph import Graph
 from truck import Truck
 import os
 
+# O(n)
 def getBestPath(truckRoute):
-    temp = truckRoute.Dijkstra()
+    temp, dist = truckRoute.Dijkstra()
     truckPath = []
     for i in range(len(temp)):
         if i == 0:
@@ -19,8 +20,9 @@ def getBestPath(truckRoute):
         else:
             truckPath.append((temp[i][0], temp[i][1] + truckPath[i - 1][1]))
     
-    return truckPath
+    return truckPath, dist
 
+# O(n)
 def getSnapshot(snap_time):
     # Get time in minutes from 00:00
     snapshot_time = (int(snap_time.split(':')[0]) * 60) + \
@@ -48,7 +50,8 @@ def getSnapshot(snap_time):
         if i < len(truck1Path) and truck3Ready == False:
             truck1_next = truck1Path[i]
             if truck1_next[1] <= dist_into_route_1:
-                for package in truck1Route.truck.packages:
+                packages = truck1Route.truck.find(truck1_next[0].address)
+                for package in packages:
                     if package.del_address == truck1_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
@@ -64,7 +67,8 @@ def getSnapshot(snap_time):
         if j < len(truck2Path) and time >= 65: # this is to hold truck 2 until 9:05 am
             truck2_next = truck2Path[j]
             if truck2_next[1] <= dist_into_route_2:
-                for package in truck2Route.truck.packages:
+                packages = truck2Route.truck.find(truck2_next[0].address)
+                for package in packages:
                     if package.del_address == truck2_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
@@ -76,7 +80,8 @@ def getSnapshot(snap_time):
         if i < len(truck3Path) and truck3Ready:
             truck3_next = truck3Path[i]
             if truck3_next[1] <= dist_into_route_3:
-                for package in truck3Route.truck.packages:
+                packages = truck3Route.truck.find(truck3_next[0].address)
+                for package in packages:
                     if package.del_address == truck3_next[0].address and str(package.status).startswith('loaded'):
                         currHour = math.floor((time + 480) / 60)
                         currMin = (time + 480) % 60
@@ -94,6 +99,7 @@ package_table = HashTable(10)
 
 locations = LocationTable()
 
+# O(n)
 with open('./data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
     for row in file:
@@ -119,27 +125,32 @@ t2 = [3,5,6,7,8,10,11,12,17,18,25,26,36,37,38,40]
 t3 = [2,4,9,21,22,23,24,27,28,32,33,35,39]
 
 # Create truck routes
+# O(n)
 truck1Route = Graph(Truck(1, t1, package_table), locations)
+# O(n)
 truck2Route = Graph(Truck(2, t2, package_table), locations)
+# O(n)
 truck3Route = Graph(Truck(3, t3, package_table), locations)
 
 # Get best route
-truck1Path = getBestPath(truck1Route)
-truck2Path = getBestPath(truck2Route)
-truck3Path = getBestPath(truck3Route)
+# O(n)
+truck1Path, truck1Dist = getBestPath(truck1Route)
+# O(n)
+truck2Path, truck2Dist = getBestPath(truck2Route)
+# O(n)
+truck3Path, truck3Dist = getBestPath(truck3Route)
 
 # User interaction
-print('Welcome to the WGUPS delivery tracker!\n1: Get snapshot of package status for all packages')
+print('Welcome to the WGUPS delivery tracker!\n1: Get snapshot of package status for all packages\n2: Get final milage for each truck and total milage\nexit: Quit program')
 command = input('->')
 
 while command.lower() != 'exit':
     if command == '1':
         time = input('What time for snapshot? (HH:mm)')
         getSnapshot(time)
-
+    
+    if command == '2':
+        total = truck1Dist + truck2Dist + truck3Dist
+        print('Truck 1 distance: {:.2f} miles\nTruck 2 distance: {:.2f} miles\nTruck 3 distance: {:.2f} miles\nTotal distance travelled: {:.2f} miles'.format(truck1Dist, truck2Dist, truck3Dist, total))
+        
     command = input('->')
-
-#getSnapshot('9:25')
-#getSnapshot('10:25')
-#getSnapshot('12:10')
-

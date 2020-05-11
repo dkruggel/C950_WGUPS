@@ -46,6 +46,15 @@ class Truck:
             if package.del_address == address:
                 return package
 
+    # Finds a list of stops/packages from an address
+    def find(self, address):
+        p = []
+        for package in self.packages:
+            if package.del_address == address:
+                p.append(package)
+        
+        return p
+
     # Returns a list of the packages on the truck
     def __len__(self):
         return len(self.packages)
