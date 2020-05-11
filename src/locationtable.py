@@ -9,7 +9,7 @@ class LocationTable:
 
         # Access the csv file and loop through rows
         # to create location objects
-        with open('./data/WGUPS Distance Table.csv', newline='') as file:
+        with open('../data/WGUPS Distance Table.csv', newline='') as file:
             reader = csv.reader(file, delimiter=',', quotechar='|')
             r = 0
             locs = []
