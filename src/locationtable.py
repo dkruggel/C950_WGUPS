@@ -3,7 +3,9 @@ import csv
 
 # Here is the location table. This object stores the
 # locations and their data as parsed from the csv file
-class LocationTable:
+class LocationTable:    
+    # O(n²) time
+    # O(n) space
     def __init__(self):
         self.locations = []
 
@@ -29,7 +31,9 @@ class LocationTable:
                     address = str(s[1])[:-8]
                     self.locations.append(Location(s[0], address, distances))
 
-    # Simply a lookup by address string
+    # Simply a lookup by address string    
+    # O(n) time
+    # O(1) space
     def getLocation(self, address):
         for location in self.locations:
             if address in location.address:

@@ -5,7 +5,9 @@ import math
 
 # The truck class is responsible for managing the
 # list of packages and, therefore, stops
-class Truck:
+class Truck:    
+    # O(n) time
+    # O(n) space
     def __init__(self, id, packageList, package_table):
         self.id = id
         self.packages = []
@@ -18,7 +20,9 @@ class Truck:
             self.addStop(package_table.search(i))
 
     # Helper function to add stops for each package while
-    # matching criteria to prevent issues
+    # matching criteria to prevent issues    
+    # O(1) time
+    # O(1) space
     def addStop(self, package):
         # Obviously can't load on truck one if it can only be on truck two
         if str(package.notes) == 'Can only be on truck 2\n' and self.id == 1:
@@ -40,13 +44,17 @@ class Truck:
         package.status = 'loaded on truck ' + str(self.id)
         return 1
 
-    # Returns the next stop/package
+    # Returns the next stop/package    
+    # O(n) time
+    # O(1) space
     def getNextStop(self, address):
         for package in self.packages:
             if package.del_address == address:
                 return package
 
-    # Finds a list of stops/packages from an address
+    # Finds a list of stops/packages from an address    
+    # O(n) time
+    # O(n) space
     def find(self, address):
         p = []
         for package in self.packages:
@@ -55,6 +63,8 @@ class Truck:
         
         return p
 
-    # Returns a list of the packages on the truck
+    # Returns a list of the packages on the truck    
+    # O(1) time
+    # O(1) space
     def __len__(self):
         return len(self.packages)

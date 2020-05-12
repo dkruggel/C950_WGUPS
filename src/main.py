@@ -10,7 +10,8 @@ from graph import Graph
 from truck import Truck
 import os
 
-# O(n)
+# O(n) time
+# O(n) space
 def getBestPath(truckRoute):
     temp, dist = truckRoute.Dijkstra()
     truckPath = []
@@ -22,7 +23,8 @@ def getBestPath(truckRoute):
     
     return truckPath, dist
 
-# O(n)
+# O(n) time
+# O(n) space
 def getSnapshot(snap_time):
     # Get time in minutes from 00:00
     snapshot_time = (int(snap_time.split(':')[0]) * 60) + \
@@ -99,7 +101,8 @@ package_table = HashTable(10)
 
 locations = LocationTable()
 
-# O(n)
+# O(n) time
+# O(n) space
 with open('../data/WGUPS Package File.csv', newline='') as file:
     reader = csv.reader(file, delimiter=',', quotechar='|')
     for row in file:
@@ -125,19 +128,25 @@ t2 = [3,5,6,7,8,10,11,12,17,18,25,26,36,37,38,40]
 t3 = [2,4,9,21,22,23,24,27,28,32,33,35,39]
 
 # Create truck routes
-# O(n)
+# O(n) time
+# O(n) space
 truck1Route = Graph(Truck(1, t1, package_table), locations)
-# O(n)
+# O(n) time
+# O(n) space
 truck2Route = Graph(Truck(2, t2, package_table), locations)
-# O(n)
+# O(n) time
+# O(n) space
 truck3Route = Graph(Truck(3, t3, package_table), locations)
 
 # Get best route
-# O(n)
+# O(n) time
+# O(n) space
 truck1Path, truck1Dist = getBestPath(truck1Route)
-# O(n)
+# O(n) time
+# O(n) space
 truck2Path, truck2Dist = getBestPath(truck2Route)
-# O(n)
+# O(n) time
+# O(n) space
 truck3Path, truck3Dist = getBestPath(truck3Route)
 
 # User interaction

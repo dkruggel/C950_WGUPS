@@ -7,6 +7,8 @@ class Location:
         self.address = address
         self.distances = dict(distances)
 
+    # O(n) time worst case, O(1) time best case
+    # O(1) space
     # This helps us easily determine the distance from
     # the location object to any other given location
     def getDistance(self, toLoc):

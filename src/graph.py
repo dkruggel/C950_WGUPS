@@ -4,6 +4,8 @@ import math
 # This is the graph class that will house the
 # structure and methods of the route graphs
 class Graph:
+    # O(n) time
+    # O(n) space
     def __init__(self, truck, locations):
         # This initializes the dictionary object to hold the vertices
         self.vertices = {}
@@ -19,7 +21,9 @@ class Graph:
         for i in range(len(truck.packages)):
             address = truck.packages[i].del_address
             self.addVertex(locations.getLocation(address))
-
+    
+    # O(1) time
+    # O(1) space
     def addVertex(self, location):
         index = len(self.vertices)
         self.vertices[index] = Vertex(location)
@@ -40,7 +44,9 @@ class Graph:
     # path at a given moment.  A greedy algorithm also behaves similarly
     # and the efficiency would be nice in a situation where the number
     # of packages per truck increases along with the number of cities
-    # and possible trucks.
+    # and possible trucks.    
+    # O(logn) time
+    # O(n) space
     def Dijkstra(self):
         # List of nodes that have not been visited
         uNodes = []

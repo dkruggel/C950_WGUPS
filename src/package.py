@@ -11,6 +11,8 @@ class Package:
         self.notes = notes
     
     # Fancy little toString() overwrite to
-    # display ID, status and address neatly
+    # display ID, status and address neatly    
+    # O(1) time
+    # O(1) space
     def __str__(self):
         return str(f"{self.id:02d}") + ': ' + str(self.status).ljust(30, ' ') + self.del_address
